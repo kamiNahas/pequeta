@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Importa íconos de Bootstrap
-import './AddProduct.css'; // Archivo CSS
+import 'bootstrap-icons/font/bootstrap-icons.css'; // Importa los íconos de Bootstrap
+import './AddProduct.css'; // Archivo CSS para estilos personalizados
 
+// Componente para agregar un producto
 const AddProduct = ({ addProduct }) => {
+    // Estado local para manejar los datos del producto
     const [product, setProduct] = useState({
-        title: '',
-        price: '',
-        description: '',
-        image: '',
+        title: '', // Título del producto
+        price: '', // Precio del producto
+        description: '', // Descripción del producto
+        image: '', // URL de la imagen del producto
     });
 
+    // Maneja los cambios en los campos del formulario
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
+        const { name, value } = e.target; // Obtiene el nombre y valor del campo
+        setProduct({ ...product, [name]: value }); // Actualiza el estado del producto
     };
 
+    // Maneja el cambio del archivo de imagen y genera una URL para la vista previa
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files[0]; // Obtiene el archivo seleccionado
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setProduct({ ...product, image: imageUrl });
+            const imageUrl = URL.createObjectURL(file); // Genera una URL para la vista previa
+            setProduct({ ...product, image: imageUrl }); // Actualiza el estado con la URL de la imagen
         }
     };
 
+    // Maneja el envío del formulario
     const handleSubmit = (e) => {
-        e.preventDefault();
-        addProduct(product);
-        alert('Producto agregado correctamente');
-        setProduct({ title: '', price: '', description: '', image: '' });
+        e.preventDefault(); // Evita que la página se recargue
+        addProduct(product); // Llama a la función `addProduct` con los datos del producto
+        alert('Producto agregado correctamente'); // Muestra una alerta de éxito
+        setProduct({ title: '', price: '', description: '', image: '' }); // Reinicia el formulario
     };
 
     return (
@@ -35,34 +40,37 @@ const AddProduct = ({ addProduct }) => {
             {/* Barra de navegación */}
             <div className="navbar-container">
                 <nav className="navbar d-flex justify-content-center align-items-center">
+                    {/* Barra de búsqueda */}
                     <div className="navbar-search">
                         <div className="input-group">
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Buscar"
+                                placeholder="Buscar" // Placeholder del campo de búsqueda
                                 aria-label="Buscar"
                             />
                             <button
                                 className="btn input-group-text"
-                                onClick={() => alert('Buscando...')}
+                                onClick={() => alert('Buscando...')} // Acción al hacer clic en buscar
                             >
-                                <i className="bi bi-search-heart"></i>
+                                <i className="bi bi-search-heart"></i> {/* Icono de búsqueda */}
                             </button>
                         </div>
                     </div>
                 </nav>
             </div>
 
-            {/* Formulario para agregar productos */}
+            {/* Tarjeta con formulario para agregar productos */}
             <div className="add-product-card">
+                {/* Vista previa de la imagen */}
                 <div className="image-preview">
                     {product.image ? (
-                        <img src={product.image} alt="Vista previa" />
+                        <img src={product.image} alt="Vista previa" /> // Muestra la imagen seleccionada
                     ) : (
-                        <p>Vista previa</p>
+                        <p>Vista previa</p> // Texto por defecto si no hay imagen
                     )}
                 </div>
+                {/* Formulario */}
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <input
@@ -70,7 +78,7 @@ const AddProduct = ({ addProduct }) => {
                             name="title"
                             value={product.title}
                             onChange={handleChange}
-                            placeholder="Título del producto"
+                            placeholder="Título del producto" // Campo para el título
                             required
                         />
                     </div>
@@ -80,7 +88,7 @@ const AddProduct = ({ addProduct }) => {
                             name="price"
                             value={product.price}
                             onChange={handleChange}
-                            placeholder="Precio del producto"
+                            placeholder="Precio del producto" // Campo para el precio
                             required
                         />
                     </div>
@@ -89,15 +97,19 @@ const AddProduct = ({ addProduct }) => {
                             name="description"
                             value={product.description}
                             onChange={handleChange}
-                            placeholder="Descripción del producto"
+                            placeholder="Descripción del producto" // Campo para la descripción
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                        <input
+                            type="file"
+                            accept="image/*" // Solo permite archivos de imagen
+                            onChange={handleImageChange}
+                        />
                     </div>
                     <button type="submit" className="add-product-btn">
-                        Agregar
+                        Agregar {/* Botón para enviar el formulario */}
                     </button>
                 </form>
             </div>

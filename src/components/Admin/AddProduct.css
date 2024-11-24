@@ -1,24 +1,24 @@
 /* Contenedor principal */
 .add-product-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffffff;
+    display: flex; /* Usa flexbox para alinear los elementos */
+    flex-direction: column; /* Los elementos se apilan en columna */
+    justify-content: flex-start; /* Alinea los elementos al principio verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    height: 100vh; /* Altura de la pantalla completa */
+    background-color: #ffffff; /* Fondo blanco */
 }
 
 /* Barra de navegación */
 .navbar-container {
-    width: 100%;
+    width: 100%; /* Ocupa el ancho completo de la pantalla */
     background-color: #ffeef5; /* Fondo rosado claro */
     padding: 10px 0; /* Espaciado superior e inferior */
 }
 
 .navbar {
     max-width: 1200px; /* Ancho máximo de la barra */
-    width: 100%;
-    display: flex;
+    width: 100%; /* Ocupa el ancho completo del contenedor */
+    display: flex; /* Flexbox para alinear elementos */
     justify-content: center; /* Centra horizontalmente el contenido */
 }
 
@@ -37,9 +37,9 @@
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     border-radius: 0 25px 25px 0; /* Bordes redondeados derechos */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Flexbox para centrar el contenido */
+    align-items: center; /* Centra el texto verticalmente */
+    justify-content: center; /* Centra el texto horizontalmente */
 }
 
 .navbar-search .btn:hover {
@@ -48,62 +48,66 @@
 
 /* Estilos para el formulario */
 .add-product-card {
-    display: flex;
-    align-items: center;
-    background: #ffeef5;
-    padding: 20px;
-    border-radius: 15px;
-    width: 60%;
+    display: flex; /* Flexbox para alinear los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    background: #ffeef5; /* Fondo rosado claro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    width: 60%; /* Ocupa el 60% del ancho del contenedor */
     margin-top: 20px; /* Espaciado desde la barra de navegación */
-    gap: 20px;
+    gap: 20px; /* Espaciado entre elementos internos */
 }
 
+/* Contenedor de la vista previa de la imagen */
 .image-preview {
-    width: 120px;
-    height: 120px;
-    border: 2px solid #ffc0cb;
-    border-radius: 15px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
+    width: 120px; /* Ancho fijo */
+    height: 120px; /* Alto fijo */
+    border: 2px solid #ffc0cb; /* Borde rosado claro */
+    border-radius: 15px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta el contenido que exceda los bordes */
+    display: flex; /* Flexbox para centrar la imagen */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    background-color: #f8f9fa; /* Fondo gris claro */
 }
 
 .image-preview img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen */
+    max-height: 100%; /* Ajusta el alto máximo de la imagen */
 }
 
+/* Contenedor del formulario */
 .form-container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-grow: 1; /* Ocupa el espacio restante dentro del flexbox */
+    display: flex; /* Flexbox para los campos del formulario */
+    flex-direction: column; /* Alinea los campos en columna */
+    gap: 15px; /* Espaciado entre los campos */
 }
 
+/* Estilos para los campos del formulario */
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ffc0cb;
-    border-radius: 25px;
-    font-size: 14px;
-    background-color: #fff;
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 10px; /* Espaciado interno */
+    border: 2px solid #ffc0cb; /* Borde rosado claro */
+    border-radius: 25px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño de fuente */
+    background-color: #fff; /* Fondo blanco */
 }
 
+/* Botón de agregar producto */
 .add-product-btn {
-    background-color: #ffc0cb;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
+    background-color: #ffc0cb; /* Fondo rosado */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 25px; /* Bordes redondeados */
+    cursor: pointer; /* Muestra el puntero al pasar el mouse */
+    width: 100%; /* Ocupa el ancho completo del contenedor */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
 }
 
 .add-product-btn:hover {
-    background-color: #ff6b6b;
+    background-color: #ff6b6b; /* Fondo más oscuro al pasar el mouse */
 }

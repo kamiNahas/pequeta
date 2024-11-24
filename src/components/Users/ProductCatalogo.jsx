@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../img/PEQUETA.png'; // Ruta corregida del logo
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import './ProductCatalogo.css'; // Ruta corregida del archivo CSS
+import logo from '../../img/PEQUETA.png'; // Importa el logo desde la ruta especificada
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importa estilos de Bootstrap
+import 'bootstrap-icons/font/bootstrap-icons.css'; // Importa los íconos de Bootstrap
+import './ProductCatalogo.css'; // Importa los estilos personalizados
 
 const ProductCatalogo = () => {
+    // Estado para manejar los artículos en el carrito
     const [cartItems, setCartItems] = useState([]);
+    // Estado para controlar la visibilidad del carrito
     const [showCart, setShowCart] = useState(false);
+    // Estado para calcular el total del carrito
     const [total, setTotal] = useState(0);
 
+    // Lista de productos disponibles
     const products = [
         { id: 1, name: "Remera Azul", description: "Remera de algodón azul", price: 2500, image: "https://via.placeholder.com/100/0000FF" },
         { id: 2, name: "Pantalón Negro", description: "Pantalón de vestir negro", price: 3500, image: "https://via.placeholder.com/100/000000" },
@@ -20,54 +24,65 @@ const ProductCatalogo = () => {
         { id: 8, name: "Abrigo Beige", description: "Abrigo largo beige", price: 6500, image: "https://via.placeholder.com/100/F5F5DC" }
     ];
 
+    // Función para agregar un producto al carrito
     const addToCart = (product) => {
         const existingProduct = cartItems.find(item => item.name === product.name);
         if (existingProduct) {
+            // Si el producto ya está en el carrito, incrementa su cantidad
             setCartItems(cartItems.map(item =>
                 item.name === product.name ? { ...item, quantity: item.quantity + 1 } : item
             ));
         } else {
+            // Si no está en el carrito, agrégalo con cantidad 1
             setCartItems([...cartItems, { ...product, quantity: 1 }]);
         }
     };
 
+    // Incrementa la cantidad de un producto en el carrito
     const incrementQuantity = (productName) => {
         setCartItems(cartItems.map(item =>
             item.name === productName ? { ...item, quantity: item.quantity + 1 } : item
         ));
     };
 
+    // Disminuye la cantidad de un producto en el carrito
     const decrementQuantity = (productName) => {
         setCartItems(cartItems.map(item =>
             item.name === productName && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
         ));
     };
 
+    // Elimina un producto del carrito
     const removeFromCart = (productName) => {
         setCartItems(cartItems.filter(item => item.name !== productName));
     };
 
+    // Calcula el total del carrito cuando cambian los artículos
     useEffect(() => {
         setTotal(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
     }, [cartItems]);
 
+    // Genera el mensaje para WhatsApp con los detalles del carrito
     const generateWhatsAppMessage = () => {
         let message = "Hola, me gustaría realizar la siguiente compra:\n\n";
         cartItems.forEach(item => {
             message += `Producto: ${item.name}\nCantidad: ${item.quantity}\nSubtotal: $${(item.price * item.quantity).toLocaleString()}\n\n`;
         });
         message += `Total: $${total.toLocaleString()}\n\nGracias.`;
-        return encodeURIComponent(message);
+        return encodeURIComponent(message); // Codifica el mensaje para usarlo en la URL
     };
 
     return (
         <div className="navbar-container">
+            {/* Barra de navegación */}
             <nav className="navbar d-flex justify-content-between align-items-center mx-auto">
+                {/* Logo */}
                 <div className="navbar-logo d-flex align-items-center">
                     <a href="/" className="navbar-brand d-flex align-items-center">
                         <img src={logo} alt="Logo" width="160" height="75" className="me-2" />
                     </a>
                 </div>
+                {/* Barra de búsqueda */}
                 <div className="navbar-search">
                     <div className="input-group">
                         <input type="text" className="form-control" placeholder="Buscar" aria-label="Buscar" />
@@ -76,17 +91,19 @@ const ProductCatalogo = () => {
                         </button>
                     </div>
                 </div>
+                {/* Botón del carrito */}
                 <div className="navbar-cart d-flex align-items-center">
                     <button type="button" className="btn position-relative" onClick={() => setShowCart(true)}>
                         <i className="bi bi-cart3" style={{ fontSize: '1.5rem', color: '#8e99a2' }}></i>
                         {cartItems.length > 0 && (
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {cartItems.length}
+                                {cartItems.length} {/* Muestra el número de artículos en el carrito */}
                             </span>
                         )}
                     </button>
                 </div>
             </nav>
+            {/* Catálogo de productos */}
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     {products.map(product => (
@@ -112,6 +129,7 @@ const ProductCatalogo = () => {
                     ))}
                 </div>
             </div>
+            {/* Modal del carrito */}
             {showCart && (
                 <div className="modal show d-block" tabIndex="-1">
                     <div className="modal-dialog modal-lg">
